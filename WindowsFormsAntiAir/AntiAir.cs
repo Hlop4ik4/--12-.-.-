@@ -39,6 +39,7 @@ bool starEmblem, bool gun)
 			_startPosY = y;
 			_pictureHeight = height;
 			_pictureWidth = width;
+			// aa //
 		}
 
 		public void MoveTransport(Direction direction)
