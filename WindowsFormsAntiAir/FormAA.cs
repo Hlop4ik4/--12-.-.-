@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WindowsFormsAntiAir
 {
-    public partial class FormAA : Form
-    {
-		private AntiAir AA;
+	public partial class FormAA : Form
+	{
+		private IAntiAir AA;
 
 		public FormAA()
 		{
@@ -23,15 +23,22 @@ namespace WindowsFormsAntiAir
 		{
 			Bitmap bmp = new Bitmap(pictureBoxAA.Width, pictureBoxAA.Height);
 			Graphics gr = Graphics.FromImage(bmp);
-			AA.DrawAA(gr);
+			AA.DrawTransport(gr);
 			pictureBoxAA.Image = bmp;
 		}
 
-		private void buttonCreate_Click(object sender, EventArgs e)
+		private void buttonCreateArmoredCar_Click(object sender, EventArgs e)
 		{
 			Random rnd = new Random();
-			AA = new AntiAir();
-			AA.Init(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Black, Color.Red, true, true);
+			AA = new ArmoredCar(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Black);
+			AA.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxAA.Width, pictureBoxAA.Height);
+			Draw();
+		}
+
+		private void buttonCreateAntiAir_Click(object sender, EventArgs e)
+		{
+			Random rnd = new Random();
+			AA = new AntiAir(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Black, Color.Red, true, true);
 			AA.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxAA.Width, pictureBoxAA.Height);
 			Draw();
 		}

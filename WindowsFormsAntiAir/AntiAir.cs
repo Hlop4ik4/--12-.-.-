@@ -7,74 +7,20 @@ using System.Drawing;
 
 namespace WindowsFormsAntiAir
 {
-	class AntiAir
+	public class AntiAir : ArmoredCar
 	{
-		private float _startPosX;
-		private float _startPosY;
-		private int _pictureWidth;
-		private int _pictureHeight;
-		private readonly int AAWidth = 280;
-		private readonly int AAHeight = 117;
-		public int MaxSpeed { private set; get; }
-		public float Weight { private set; get; }
-		public Color MainColor { private set; get; }
 		public Color DopColor { private set; get; }
 		public bool StarEmblem { private set; get; }
 		public bool Gun { private set; get; }
 
-		public void Init(int maxSpeed, float weight, Color mainColor, Color dopColor,
-bool starEmblem, bool gun)
+		public AntiAir(int maxSpeed, float weight, Color mainColor, Color dopColor, bool starEmblem, bool gun) : base(maxSpeed, weight, mainColor, 280, 117)
 		{
-			MaxSpeed = maxSpeed;
-			Weight = weight;
-			MainColor = mainColor;
 			DopColor = dopColor;
 			StarEmblem = starEmblem;
 			Gun = gun;
 		}
 
-		public void SetPosition(int x, int y, int width, int height)
-		{
-			_startPosX = x;
-			_startPosY = y;
-			_pictureHeight = height;
-			_pictureWidth = width;
-			// aa //
-		}
-
-		public void MoveTransport(Direction direction)
-		{
-			float step = MaxSpeed * 100 / Weight;
-			switch (direction)
-			{
-				case Direction.Right:
-					if (_startPosX + step < _pictureWidth - AAWidth)
-					{
-						_startPosX += step;
-					}
-					break;
-				case Direction.Left:
-					if (_startPosX - step > 0)
-					{
-						_startPosX -= step;
-					}
-					break;
-				case Direction.Up:
-					if (_startPosY - step > 0)
-					{
-						_startPosY -= step;
-					}
-					break;
-				case Direction.Down:
-					if (_startPosY + step < _pictureHeight - AAHeight)
-					{
-						_startPosY += step;
-					}
-					break;
-			}
-		}
-
-		public void DrawAA(Graphics g)
+		public override void DrawTransport(Graphics g)
 		{
 			if (Gun)
 			{
@@ -83,22 +29,7 @@ bool starEmblem, bool gun)
 				Pen DopPen = new Pen(DopColor);
 				g.DrawLine(DopPen, _startPosX + 130, _startPosY + 17, _startPosX + 70, _startPosY - 3);
 			}
-			Pen pen = new Pen(Color.Black);
-			g.DrawArc(pen, _startPosX, _startPosY + 62, 50, 50, 90, 180);
-			g.DrawArc(pen, _startPosX + 230, _startPosY + 62, 50, 50, 270, 180);
-			g.DrawLine(pen, _startPosX + 25, _startPosY + 112, _startPosX + 255, _startPosY + 112);
-			g.DrawEllipse(pen, _startPosX + 5, _startPosY + 64, 45, 45);
-			g.DrawEllipse(pen, _startPosX + 231, _startPosY + 64, 45, 45);
-			g.DrawEllipse(pen, _startPosX + 60, _startPosY + 82, 30, 30);
-			g.DrawEllipse(pen, _startPosX + 100, _startPosY + 82, 30, 30);
-			g.DrawEllipse(pen, _startPosX + 140, _startPosY + 82, 30, 30);
-			g.DrawEllipse(pen, _startPosX + 180, _startPosY + 82, 30, 30);
-			Brush br = new SolidBrush(MainColor);
-			g.FillRectangle(br, _startPosX + 80, _startPosY + 17, 100, 40);
-			g.FillRectangle(br, _startPosX + 10, _startPosY + 47, 260, 22);
-			g.FillEllipse(br, _startPosX + 130, _startPosY + 57, 20, 20);
-			g.FillEllipse(br, _startPosX + 90, _startPosY + 57, 20, 20);
-			g.FillEllipse(br, _startPosX + 170, _startPosY + 57, 20, 20);
+			base.DrawTransport(g);
 			if (StarEmblem)
 			{
 				Brush brDop = new SolidBrush(DopColor);

@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.pictureBoxAA = new System.Windows.Forms.PictureBox();
-            this.buttonCreate = new System.Windows.Forms.Button();
+            this.buttonCreateArmoredCar = new System.Windows.Forms.Button();
             this.buttonUp = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
+            this.buttonCreateAntiAir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAA)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,15 +47,15 @@
             this.pictureBoxAA.TabIndex = 0;
             this.pictureBoxAA.TabStop = false;
             // 
-            // buttonCreate
+            // buttonCreateArmoredCar
             // 
-            this.buttonCreate.Location = new System.Drawing.Point(0, 0);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(75, 23);
-            this.buttonCreate.TabIndex = 1;
-            this.buttonCreate.Text = "Создать";
-            this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            this.buttonCreateArmoredCar.Location = new System.Drawing.Point(0, 0);
+            this.buttonCreateArmoredCar.Name = "buttonCreateArmoredCar";
+            this.buttonCreateArmoredCar.Size = new System.Drawing.Size(131, 23);
+            this.buttonCreateArmoredCar.TabIndex = 1;
+            this.buttonCreateArmoredCar.Text = "Создать бронемашину";
+            this.buttonCreateArmoredCar.UseVisualStyleBackColor = true;
+            this.buttonCreateArmoredCar.Click += new System.EventHandler(this.buttonCreateArmoredCar_Click);
             // 
             // buttonUp
             // 
@@ -104,6 +105,16 @@
             this.buttonRight.UseVisualStyleBackColor = true;
             this.buttonRight.Click += new System.EventHandler(this.buttonMove_Click);
             // 
+            // buttonCreateAntiAir
+            // 
+            this.buttonCreateAntiAir.Location = new System.Drawing.Point(137, 0);
+            this.buttonCreateAntiAir.Name = "buttonCreateAntiAir";
+            this.buttonCreateAntiAir.Size = new System.Drawing.Size(85, 23);
+            this.buttonCreateAntiAir.TabIndex = 1;
+            this.buttonCreateAntiAir.Text = "Создать ЗСУ";
+            this.buttonCreateAntiAir.UseVisualStyleBackColor = true;
+            this.buttonCreateAntiAir.Click += new System.EventHandler(this.buttonCreateAntiAir_Click);
+            // 
             // FormAA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -113,7 +124,8 @@
             this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.buttonUp);
-            this.Controls.Add(this.buttonCreate);
+            this.Controls.Add(this.buttonCreateAntiAir);
+            this.Controls.Add(this.buttonCreateArmoredCar);
             this.Controls.Add(this.pictureBoxAA);
             this.Name = "FormAA";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -126,11 +138,12 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxAA;
-        private System.Windows.Forms.Button buttonCreate;
+        private System.Windows.Forms.Button buttonCreateArmoredCar;
         private System.Windows.Forms.Button buttonUp;
         private System.Windows.Forms.Button buttonDown;
         private System.Windows.Forms.Button buttonLeft;
         private System.Windows.Forms.Button buttonRight;
+        private System.Windows.Forms.Button buttonCreateAntiAir;
     }
 }
 
