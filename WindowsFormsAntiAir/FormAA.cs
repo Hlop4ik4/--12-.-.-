@@ -19,11 +19,17 @@ namespace WindowsFormsAntiAir
 			InitializeComponent();
 		}
 
+		public void SetCar(IAntiAir AA)
+		{
+			this.AA = AA;
+			Draw();
+		}
+
 		private void Draw()
 		{
 			Bitmap bmp = new Bitmap(pictureBoxAA.Width, pictureBoxAA.Height);
 			Graphics gr = Graphics.FromImage(bmp);
-			AA.DrawTransport(gr);
+			AA?.DrawTransport(gr);
 			pictureBoxAA.Image = bmp;
 		}
 
@@ -49,16 +55,16 @@ namespace WindowsFormsAntiAir
 			switch (name)
 			{
 				case "buttonUp":
-					AA.MoveTransport(Direction.Up);
+					AA?.MoveTransport(Direction.Up);
 					break;
 				case "buttonDown":
-					AA.MoveTransport(Direction.Down);
+					AA?.MoveTransport(Direction.Down);
 					break;
 				case "buttonLeft":
-					AA.MoveTransport(Direction.Left);
+					AA?.MoveTransport(Direction.Left);
 					break;
 				case "buttonRight":
-					AA.MoveTransport(Direction.Right);
+					AA?.MoveTransport(Direction.Right);
 					break;
 			}
 			Draw();

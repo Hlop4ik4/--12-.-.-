@@ -16,7 +16,7 @@ namespace WindowsFormsAntiAir
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormAA());
+            Application.Run(new FormBase());
         }
     }
 }
