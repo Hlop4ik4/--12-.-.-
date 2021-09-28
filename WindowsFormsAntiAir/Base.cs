@@ -12,8 +12,8 @@ namespace WindowsFormsAntiAir
 		private readonly T[] _places;
 		private readonly int pictureWidth;
 		private readonly int pictureHeight;
-		private readonly int _placeSizeWidth = 280;
-		private readonly int _placeSizeHeight = 117;
+		private readonly int _placeSizeWidth = 290;
+		private readonly int _placeSizeHeight = 130;
 
 		public Base(int picWidth, int picHeight)
 		{
@@ -49,11 +49,19 @@ namespace WindowsFormsAntiAir
 			DrawMarking(g);
 			int startPosX = 0;
 			int startPosY = 0;
+			int j = 0;
 			for(int i = 0; i < _places.Length; i++)
 			{
-				_places[i].SetPosition(startPosX, startPosY, pictureWidth, pictureHeight);
+				if (j > pictureWidth / _placeSizeWidth)
+				{
+					j = 0;
+					startPosX += 290;
+					startPosY = 0;
+				}
+				_places[i]?.SetPosition(startPosX, startPosY, pictureWidth, pictureHeight);
 				_places[i]?.DrawTransport(g);
-				startPosY += 117;
+				startPosY += 130;
+				j++;
 			}
 		}
 

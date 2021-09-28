@@ -25,9 +25,9 @@ namespace WindowsFormsAntiAir
 			if (Gun)
 			{
 				Brush brDop = new SolidBrush(DopColor);
-				g.FillEllipse(brDop, _startPosX + 90, _startPosY - 3, 80, 60);
+				g.FillEllipse(brDop, _startPosX + 90, _startPosY + 8, 80, 60);
 				Pen DopPen = new Pen(DopColor);
-				g.DrawLine(DopPen, _startPosX + 130, _startPosY + 17, _startPosX + 70, _startPosY - 3);
+				g.DrawLine(DopPen, _startPosX + 130, _startPosY + 28, _startPosX + 70, _startPosY + 8);
 			}
 			base.DrawTransport(g);
 			if (StarEmblem)
