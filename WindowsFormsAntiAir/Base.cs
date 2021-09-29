@@ -24,17 +24,17 @@ namespace WindowsFormsAntiAir
 			pictureHeight = picHeight;
 		}
 
-		public static bool operator +(Base<T> p, T car)
+		public static int operator +(Base<T> p, T car)
 		{
 			for(int i = 0; i < p._places.Length; i++)
 			{
 				if(p._places[i] == null)
 				{
 					p._places[i] = car;
-					return true;
+					return i;
 				}
 			}
-			return false;
+			return -1;
 		}
 
 		public static T operator -(Base<T> p, int index)
@@ -48,7 +48,7 @@ namespace WindowsFormsAntiAir
 		{
 			DrawMarking(g);
 			int startPosX = 0;
-			int startPosY = 0;
+			int startPosY = 14;
 			int j = 0;
 			for(int i = 0; i < _places.Length; i++)
 			{
@@ -56,7 +56,7 @@ namespace WindowsFormsAntiAir
 				{
 					j = 0;
 					startPosX += 290;
-					startPosY = 0;
+					startPosY = 14;
 				}
 				_places[i]?.SetPosition(startPosX, startPosY, pictureWidth, pictureHeight);
 				_places[i]?.DrawTransport(g);

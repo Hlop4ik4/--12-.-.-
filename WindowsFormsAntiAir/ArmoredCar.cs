@@ -63,21 +63,21 @@ namespace WindowsFormsAntiAir
 		public override void DrawTransport(Graphics g)
 		{
 			Pen pen = new Pen(Color.Black);
-			g.DrawArc(pen, _startPosX, _startPosY + 73, 50, 50, 90, 180);
-			g.DrawArc(pen, _startPosX + 230, _startPosY + 73, 50, 50, 270, 180);
-			g.DrawLine(pen, _startPosX + 25, _startPosY + 123, _startPosX + 255, _startPosY + 123);
-			g.DrawEllipse(pen, _startPosX + 5, _startPosY + 75, 45, 45);
-			g.DrawEllipse(pen, _startPosX + 231, _startPosY + 75, 45, 45);
-			g.DrawEllipse(pen, _startPosX + 60, _startPosY + 93, 30, 30);
-			g.DrawEllipse(pen, _startPosX + 100, _startPosY + 93, 30, 30);
-			g.DrawEllipse(pen, _startPosX + 140, _startPosY + 93, 30, 30);
-			g.DrawEllipse(pen, _startPosX + 180, _startPosY + 93, 30, 30);
+			g.DrawArc(pen, _startPosX, _startPosY + 62, 50, 50, 90, 180);
+			g.DrawArc(pen, _startPosX + 230, _startPosY + 62, 50, 50, 270, 180);
+			g.DrawLine(pen, _startPosX + 25, _startPosY + 112, _startPosX + 255, _startPosY + 112);
+			g.DrawEllipse(pen, _startPosX + 5, _startPosY + 64, 45, 45);
+			g.DrawEllipse(pen, _startPosX + 231, _startPosY + 64, 45, 45);
+			g.DrawEllipse(pen, _startPosX + 60, _startPosY + 82, 30, 30);
+			g.DrawEllipse(pen, _startPosX + 100, _startPosY + 82, 30, 30);
+			g.DrawEllipse(pen, _startPosX + 140, _startPosY + 82, 30, 30);
+			g.DrawEllipse(pen, _startPosX + 180, _startPosY + 82, 30, 30);
 			Brush br = new SolidBrush(MainColor);
-			g.FillRectangle(br, _startPosX + 80, _startPosY + 28, 100, 40);
-			g.FillRectangle(br, _startPosX + 10, _startPosY + 58, 260, 22);
-			g.FillEllipse(br, _startPosX + 130, _startPosY + 68, 20, 20);
-			g.FillEllipse(br, _startPosX + 90, _startPosY + 68, 20, 20);
-			g.FillEllipse(br, _startPosX + 170, _startPosY + 68, 20, 20);
+			g.FillRectangle(br, _startPosX + 80, _startPosY + 17, 100, 40);
+			g.FillRectangle(br, _startPosX + 10, _startPosY + 47, 260, 22);
+			g.FillEllipse(br, _startPosX + 130, _startPosY + 57, 20, 20);
+			g.FillEllipse(br, _startPosX + 90, _startPosY + 57, 20, 20);
+			g.FillEllipse(br, _startPosX + 170, _startPosY + 57, 20, 20);
 		}
 	}
 }

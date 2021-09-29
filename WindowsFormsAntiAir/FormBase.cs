@@ -35,7 +35,7 @@ namespace WindowsFormsAntiAir
 			if(dialog.ShowDialog() == DialogResult.OK)
 			{
 				var armoredCar = new ArmoredCar(100, 1000, dialog.Color);
-				if(militaryBase + armoredCar)
+				if(militaryBase + armoredCar >= 0)
 				{
 					Draw();
 				}
@@ -55,7 +55,7 @@ namespace WindowsFormsAntiAir
 				if(dialogDop.ShowDialog() == DialogResult.OK)
 				{
 					var aa = new AntiAir(100, 1000, dialog.Color, dialogDop.Color, true, true);
-					if(militaryBase + aa)
+					if(militaryBase + aa >= 0)
 					{
 						Draw();
 					}
