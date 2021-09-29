@@ -49,19 +49,19 @@ namespace WindowsFormsAntiAir
 			DrawMarking(g);
 			int startPosX = 0;
 			int startPosY = 14;
-			int j = 0;
+			int verticalPlacesCount = 0;
 			for(int i = 0; i < _places.Length; i++)
 			{
-				if (j > pictureWidth / _placeSizeWidth)
+				if (verticalPlacesCount > pictureWidth / _placeSizeWidth)
 				{
-					j = 0;
+					verticalPlacesCount = 0;
 					startPosX += 290;
 					startPosY = 14;
 				}
 				_places[i]?.SetPosition(startPosX, startPosY, pictureWidth, pictureHeight);
 				_places[i]?.DrawTransport(g);
 				startPosY += 130;
-				j++;
+				verticalPlacesCount++;
 			}
 		}
 
