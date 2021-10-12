@@ -49,6 +49,7 @@
     <Compile Include="AntiAir.cs" />
     <Compile Include="ArmoredCar.cs" />
     <Compile Include="Base.cs" />
+    <Compile Include="BaseCollection.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="FormAA.cs">
       <SubType>Form</SubType>

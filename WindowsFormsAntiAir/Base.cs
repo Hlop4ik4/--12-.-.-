@@ -9,7 +9,8 @@ namespace WindowsFormsAntiAir
 {
 	public class Base<T> where T : class, IAntiAir
 	{
-		private readonly T[] _places;
+		private readonly List<T> _places;
+		private readonly int _maxCount;
 		private readonly int pictureWidth;
 		private readonly int pictureHeight;
 		private readonly int _placeSizeWidth = 290;
@@ -19,30 +20,31 @@ namespace WindowsFormsAntiAir
 		{
 			int width = picWidth / _placeSizeWidth;
 			int height = picHeight / _placeSizeHeight;
-			_places = new T[width * height];
+			_maxCount = width * height;
 			pictureWidth = picWidth;
 			pictureHeight = picHeight;
+			_places = new List<T>();
 		}
 
 		public static int operator +(Base<T> p, T car)
 		{
-			for(int i = 0; i < p._places.Length; i++)
+			if(p._places.Count + 1 <= p._maxCount)
 			{
-				if(p._places[i] == null)
-				{
-					p._places[i] = car;
-					return i;
-				}
+				p._places.Add(car);
+				return p._places.IndexOf(car);
 			}
-			return -1;
+			else
+			{
+				return -1;
+			}
 		}
 
 		public static T operator -(Base<T> p, int index)
 		{
-			if (index < p._places.Length)
+			if (index < p._places.Count || index >= 0)
 			{
 				T transport = p._places[index];
-				p._places[index] = null;
+				p._places.RemoveAt(index);
 				return transport;
 			}
 			else
@@ -57,7 +59,7 @@ namespace WindowsFormsAntiAir
 			int startPosX = 0;
 			int startPosY = 14;
 			int horizontalPlacesCount = 0;
-			for(int i = 0; i < _places.Length; i++)
+			for(int i = 0; i < _places.Count; i++)
 			{
 				if (horizontalPlacesCount > (pictureWidth / _placeSizeWidth) - 1)
 				{
