@@ -39,9 +39,16 @@ namespace WindowsFormsAntiAir
 
 		public static T operator -(Base<T> p, int index)
 		{
-			T transport = p._places[index];
-			p._places[index] = null;
-			return transport;
+			if (index < p._places.Length)
+			{
+				T transport = p._places[index];
+				p._places[index] = null;
+				return transport;
+			}
+			else
+			{
+				return null;
+			}
 		}
 
 		public void Draw(Graphics g)
@@ -49,19 +56,19 @@ namespace WindowsFormsAntiAir
 			DrawMarking(g);
 			int startPosX = 0;
 			int startPosY = 14;
-			int verticalPlacesCount = 0;
+			int horizontalPlacesCount = 0;
 			for(int i = 0; i < _places.Length; i++)
 			{
-				if (verticalPlacesCount > pictureWidth / _placeSizeWidth)
+				if (horizontalPlacesCount > (pictureWidth / _placeSizeWidth) - 1)
 				{
-					verticalPlacesCount = 0;
-					startPosX += 290;
-					startPosY = 14;
+					horizontalPlacesCount = 0;
+					startPosY += 130;
+					startPosX = 0;
 				}
 				_places[i]?.SetPosition(startPosX, startPosY, pictureWidth, pictureHeight);
 				_places[i]?.DrawTransport(g);
-				startPosY += 130;
-				verticalPlacesCount++;
+				startPosX += 290;
+				horizontalPlacesCount++;
 			}
 		}
 
