@@ -47,5 +47,10 @@ namespace WindowsFormsAntiAir
 				g.FillPolygon(brDop, arr);
 			}
 		}
+
+		public void SetDopColor(Color color)
+		{
+			DopColor = color;
+		}
 	}
 }
