@@ -85,5 +85,26 @@ namespace WindowsFormsAntiAir
             eventAddCar?.Invoke(antiAir);
             Close();
         }
+
+        private void labelMainColor_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent("BackColor"))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void labelMainColor_DragDrop(object sender, DragEventArgs e)
+        {
+            switch (e.Data.GetData("BackColor").ToString())
+            {
+                case "Red":
+                    
+            }
+        }
     }
 }
