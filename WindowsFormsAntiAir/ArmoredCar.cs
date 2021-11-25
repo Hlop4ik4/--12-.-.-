@@ -11,6 +11,18 @@ namespace WindowsFormsAntiAir
 	{
 		protected readonly int AAWidth = 280;
 		protected readonly int AAHeight = 100;
+		protected readonly char separator = ';';
+
+		public ArmoredCar(string info)
+		{
+			string[] strs = info.Split(separator);
+			if(strs.Length == 3)
+			{
+				MaxSpeed = Convert.ToInt32(strs[0]);
+				Weight = Convert.ToInt32(strs[1]);
+				MainColor = Color.FromName(strs[2]);
+			}
+		}
 
 		public ArmoredCar(int maxSpeed, float weight, Color mainColor)
 		{
@@ -78,6 +90,11 @@ namespace WindowsFormsAntiAir
 			g.FillEllipse(br, _startPosX + 130, _startPosY + 57, 20, 20);
 			g.FillEllipse(br, _startPosX + 90, _startPosY + 57, 20, 20);
 			g.FillEllipse(br, _startPosX + 170, _startPosY + 57, 20, 20);
+		}
+
+		public override string ToString()
+		{
+			return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor}";
 		}
 	}
 }
