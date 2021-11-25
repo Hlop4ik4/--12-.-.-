@@ -12,13 +12,21 @@ namespace WindowsFormsAntiAir
 {
     public partial class FormAAConfig : Form
     {
-        Vehicle antiAir = null;
-        private event CarDelegate eventAddCar;
+        ArmoredCar antiAir = null;
+        private event Action<ArmoredCar> eventAddCar;
         public FormAAConfig()
         {
             InitializeComponent();
 
             buttonCancel.Click += (object sender, EventArgs e) => { Close(); };
+            panelRed.MouseDown += panelColor_MouseDown;
+            panelYelow.MouseDown += panelColor_MouseDown;
+            panelBlack.MouseDown += panelColor_MouseDown;
+            panelBlue.MouseDown += panelColor_MouseDown;
+            panelGreen.MouseDown += panelColor_MouseDown;
+            panelGrey.MouseDown += panelColor_MouseDown;
+            panelOrange.MouseDown += panelColor_MouseDown;
+            panelWhite.MouseDown += panelColor_MouseDown;
         }
 
         private void DrawCar()
@@ -33,16 +41,14 @@ namespace WindowsFormsAntiAir
             }
         }
 
-        public void AddEvent(CarDelegate ev)
+        private void panelColor_MouseDown(object sender, MouseEventArgs e)
         {
-            if(eventAddCar == null)
-            {
-                eventAddCar = new CarDelegate(ev);
-            }
-            else
-            {
-                eventAddCar += ev;
-            }
+            (sender as Control).DoDragDrop((sender as Control).BackColor, DragDropEffects.Copy | DragDropEffects.Move);
+        }
+
+        public void AddEvent(Action<Vehicle> ev)
+        {
+            eventAddCar += ev;
         }
         private void labelArmoredCar_MouseDown(object sender, MouseEventArgs e)
         {
@@ -88,7 +94,7 @@ namespace WindowsFormsAntiAir
 
         private void labelMainColor_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent("BackColor"))
+            if (e.Data.GetDataPresent(typeof(Color)))
             {
                 e.Effect = DragDropEffects.Copy;
             }
@@ -100,10 +106,22 @@ namespace WindowsFormsAntiAir
 
         private void labelMainColor_DragDrop(object sender, DragEventArgs e)
         {
-            switch (e.Data.GetData("BackColor").ToString())
+            if(antiAir != null)
             {
-                case "Red":
-                    
+                antiAir.SetMainColor((Color)e.Data.GetData(typeof(Color)));
+                DrawCar();
+            }
+        }
+
+        private void labelDopColor_DragDrop(object sender, DragEventArgs e)
+        {
+            if(antiAir != null)
+            {
+                if(antiAir is AntiAir)
+                {
+                    (antiAir as AntiAir).SetDopColor((Color)e.Data.GetData(typeof(Color)));
+                    DrawCar();
+                }
             }
         }
     }

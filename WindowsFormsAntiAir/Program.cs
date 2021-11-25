@@ -6,7 +6,6 @@ using System.Windows.Forms;
 
 namespace WindowsFormsAntiAir
 {
-    public delegate void CarDelegate(Vehicle car);
     static class Program
     {
         /// <summary>
