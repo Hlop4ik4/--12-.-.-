@@ -80,7 +80,7 @@ namespace WindowsFormsAntiAir
                     antiAir = new ArmoredCar(100, 500, Color.White);
                     break;
                 case "ЗСУ":
-                    antiAir = new AntiAir(100, 500, Color.White, Color.Black, true, true);
+                    antiAir = new AntiAir(100, 500, Color.White, Color.Black, checkBoxStar.Checked, checkBoxGun.Checked);
                     break;
             }
             DrawCar();
@@ -124,5 +124,5 @@ namespace WindowsFormsAntiAir
                 }
             }
         }
-    }
+	}
 }
