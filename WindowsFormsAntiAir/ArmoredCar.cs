@@ -94,7 +94,7 @@ namespace WindowsFormsAntiAir
 
 		public override string ToString()
 		{
-			return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor}";
+			return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
 		}
 	}
 }

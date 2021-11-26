@@ -29,8 +29,8 @@ namespace WindowsFormsAntiAir
 				Weight = Convert.ToInt32(strs[1]);
 				MainColor = Color.FromName(strs[2]);
 				DopColor = Color.FromName(strs[3]);
-				Gun = Convert.ToBoolean(strs[4]);
-				StarEmblem = Convert.ToBoolean(strs[5]);
+				StarEmblem = Convert.ToBoolean(strs[4]);
+				Gun = Convert.ToBoolean(strs[5]);
 			}
 		}
 
@@ -69,7 +69,7 @@ namespace WindowsFormsAntiAir
 
 		public override string ToString()
 		{
-			return $"{base.ToString()}{separator}{DopColor.Name}{separator}{Gun}{separator}{StarEmblem}";
+			return $"{base.ToString()}{separator}{DopColor.Name}{separator}{StarEmblem}{separator}{Gun}";
 		}
 	}
 }

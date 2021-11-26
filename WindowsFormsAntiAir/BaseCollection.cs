@@ -60,13 +60,12 @@ namespace WindowsFormsAntiAir
 			{
 				File.Delete(filename);
 			}
-			using (FileStream fs = new FileStream(filename, FileMode.Create))
+			using (StreamWriter sw = new StreamWriter(filename, true))
 			{
-				StreamWriter sw = new StreamWriter(fs);
-				sw.WriteLine($"BaseCollection{Environment.NewLine}", fs);
-				foreach(var level in baseStages)
+				sw.Write($"BaseCollection{Environment.NewLine}");
+				foreach (var level in baseStages)
 				{
-					sw.WriteLine($"Base{separator}{level.Key}{Environment.NewLine}", fs);
+					sw.Write($"Base{separator}{level.Key}{Environment.NewLine}");
 					IAntiAir car = null;
 					for(int i = 0; (car = level.Value.GetNext(i)) != null; i++)
 					{
@@ -74,13 +73,13 @@ namespace WindowsFormsAntiAir
 						{
 							if(car.GetType().Name == "ArmoredCar")
 							{
-								sw.WriteLine($"ArmoredCar{separator}", fs);
+								sw.Write($"ArmoredCar{separator}");
 							}
 							if(car.GetType().Name == "AntiAir")
 							{
-								sw.WriteLine($"AntiAir{separator}", fs);
+								sw.Write($"AntiAir{separator}");
 							}
-							sw.WriteLine(car + Environment.NewLine, fs);
+							sw.Write(car + Environment.NewLine);
 						}
 					}
 				}
@@ -94,44 +93,45 @@ namespace WindowsFormsAntiAir
 			{
 				return false;
 			}
-			string bufferTextFromFile = "0";
-			using(FileStream fs = new FileStream(filename, FileMode.Open))
+			using(StreamReader sr = new StreamReader(filename))
 			{
-				StreamReader sr = new StreamReader(fs);
-				while (!string.IsNullOrEmpty(bufferTextFromFile))
+				string str = sr.ReadLine();
+				if (str.Contains("BaseCollection"))
 				{
-					bufferTextFromFile = sr.ReadLine();
-					if (bufferTextFromFile.Contains("BaseCollection"))
+					baseStages.Clear();
+				}
+				else
+				{
+					return false;
+				}
+				Vehicle car = null;
+				string key = string.Empty;
+				while ((str = sr.ReadLine()) != null)
+				{
+					if (str.Contains("Base"))
 					{
-						baseStages.Clear();
-					}
-					else
-					{
-						return false;
-					}
-					Vehicle car = null;
-					string key = string.Empty;
-					if (bufferTextFromFile.Contains("Base"))
-					{
-						key = bufferTextFromFile.Split(separator)[1];
+						key = str.Split(separator)[1];
 						baseStages.Add(key, new Base<Vehicle>(pictureWidth, pictureHeight));
 					}
-					if (bufferTextFromFile.Split(separator)[0] == "ArmoredCar")
+					else if (str.Contains(separator))
 					{
-						car = new ArmoredCar(bufferTextFromFile.Split(separator)[1]);
-					}
-					else if (bufferTextFromFile.Split(separator)[0] == "AntiAir")
-					{
-						car = new AntiAir(bufferTextFromFile.Split(separator)[1]);
-					}
-					var result = baseStages[key] + car;
-					if (result < 0)
-					{
-						return false;
+						if (str.Contains("ArmoredCar"))
+						{
+							car = new ArmoredCar(str.Split(separator)[1]);
+						}
+						else if (str.Contains("AntiAir"))
+						{
+							car = new AntiAir(str.Split(separator)[1]);
+						}
+						var result = baseStages[key] + car;
+						if (result < 0)
+						{
+							return false;
+						}
 					}
 				}
-				return true;
 			}
+			return true;
 		}
 	}
 }

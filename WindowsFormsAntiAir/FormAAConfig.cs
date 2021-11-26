@@ -77,10 +77,10 @@ namespace WindowsFormsAntiAir
             switch (e.Data.GetData(DataFormats.Text).ToString())
             {
                 case "Обычная бронемашина":
-                    antiAir = new ArmoredCar(100, 500, Color.White);
+                    antiAir = new ArmoredCar(Convert.ToInt32(numericUpDownSpeed.Value), Convert.ToInt32(numericUpDownWeight.Value), Color.White);
                     break;
                 case "ЗСУ":
-                    antiAir = new AntiAir(100, 500, Color.White, Color.Black, true, true);
+                    antiAir = new AntiAir(Convert.ToInt32(numericUpDownSpeed.Value), Convert.ToInt32(numericUpDownWeight.Value), Color.White, Color.Black, checkBoxStar.Checked, checkBoxGun.Checked);
                     break;
             }
             DrawCar();
