@@ -31,8 +31,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBoxGun = new System.Windows.Forms.CheckBox();
             this.checkBoxStar = new System.Windows.Forms.CheckBox();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownWeight = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownSpeed = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxAA = new System.Windows.Forms.PictureBox();
@@ -54,8 +54,8 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAA)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.panelAA.SuspendLayout();
@@ -66,8 +66,8 @@
             // 
             this.groupBox1.Controls.Add(this.checkBoxGun);
             this.groupBox1.Controls.Add(this.checkBoxStar);
-            this.groupBox1.Controls.Add(this.numericUpDown2);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.numericUpDownWeight);
+            this.groupBox1.Controls.Add(this.numericUpDownSpeed);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(18, 170);
@@ -97,19 +97,19 @@
             this.checkBoxStar.Text = "Звезда";
             this.checkBoxStar.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown2
+            // numericUpDownWeight
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(63, 76);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(45, 20);
-            this.numericUpDown2.TabIndex = 3;
+            this.numericUpDownWeight.Location = new System.Drawing.Point(63, 76);
+            this.numericUpDownWeight.Name = "numericUpDownWeight";
+            this.numericUpDownWeight.Size = new System.Drawing.Size(45, 20);
+            this.numericUpDownWeight.TabIndex = 3;
             // 
-            // numericUpDown1
+            // numericUpDownSpeed
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(63, 37);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(45, 20);
-            this.numericUpDown1.TabIndex = 2;
+            this.numericUpDownSpeed.Location = new System.Drawing.Point(63, 37);
+            this.numericUpDownSpeed.Name = "numericUpDownSpeed";
+            this.numericUpDownSpeed.Size = new System.Drawing.Size(45, 20);
+            this.numericUpDownSpeed.TabIndex = 2;
             // 
             // label2
             // 
@@ -333,8 +333,8 @@
             this.Text = "FormAAConfig";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAA)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.panelAA.ResumeLayout(false);
@@ -346,8 +346,8 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDownWeight;
+        private System.Windows.Forms.NumericUpDown numericUpDownSpeed;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxGun;
