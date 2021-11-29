@@ -54,7 +54,7 @@ namespace WindowsFormsAntiAir
 			}
 		}
 
-		public bool SaveData(string filename)
+		public void SaveData(string filename)
 		{
 			if (File.Exists(filename))
 			{
@@ -84,14 +84,13 @@ namespace WindowsFormsAntiAir
 					}
 				}
 			}
-			return true;
 		}
 
-		public bool LoadData(string filename)
+		public void LoadData(string filename)
 		{
 			if (!File.Exists(filename))
 			{
-				return false;
+				throw new FileNotFoundException();
 			}
 			using(StreamReader sr = new StreamReader(filename))
 			{
@@ -102,7 +101,7 @@ namespace WindowsFormsAntiAir
 				}
 				else
 				{
-					return false;
+					throw new Exception("Неверный формат файла");
 				}
 				Vehicle car = null;
 				string key = string.Empty;
@@ -126,12 +125,11 @@ namespace WindowsFormsAntiAir
 						var result = baseStages[key] + car;
 						if (result < 0)
 						{
-							return false;
+							throw new Exception("Не удалось загрузить транспорт на базу");
 						}
 					}
 				}
 			}
-			return true;
 		}
 	}
 }

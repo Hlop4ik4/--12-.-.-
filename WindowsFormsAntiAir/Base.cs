@@ -35,7 +35,7 @@ namespace WindowsFormsAntiAir
 			}
 			else
 			{
-				return -1;
+				throw new BaseOverflowException();
 			}
 		}
 
@@ -49,7 +49,7 @@ namespace WindowsFormsAntiAir
 			}
 			else
 			{
-				return null;
+				throw new BaseNotFoundException(index);
 			}
 		}
 

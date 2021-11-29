@@ -7,18 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NLog;
 
 namespace WindowsFormsAntiAir
 {
 	public partial class FormBase : Form
 	{
 		private readonly BaseCollection baseCollection;
+		private readonly Logger logger;
 
 		public FormBase()
 		{
 			InitializeComponent();
 			baseCollection = new BaseCollection(pictureBoxBase.Width, pictureBoxBase.Height);
 			Draw();
+			logger = LogManager.GetCurrentClassLogger();
 		}
 
 		private void ReloadLevels()
@@ -60,6 +63,7 @@ namespace WindowsFormsAntiAir
 				return;
 			}
 
+			logger.Info($"Добавили парковку {textBoxNewLevelName.Text}");
 			baseCollection.AddBase(textBoxNewLevelName.Text);
 			ReloadLevels();
 		}
@@ -70,6 +74,7 @@ namespace WindowsFormsAntiAir
 			{
 				if(MessageBox.Show($"Удалить базу {listBoxBase.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
 				{
+					logger.Info($"Удалили парковку {listBoxBase.SelectedItem.ToString()}");
 					baseCollection.DelBase(textBoxNewLevelName.Text);
 					ReloadLevels();
 				}
@@ -80,19 +85,32 @@ namespace WindowsFormsAntiAir
 		{
 			if(listBoxBase.SelectedIndex > -1 && maskedTextBox.Text != "")
 			{
-				var car = baseCollection[listBoxBase.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
-				if(car != null)
+				try
 				{
-					FormAA form = new FormAA();
-					form.SetCar(car);
-					form.ShowDialog();
+					var car = baseCollection[listBoxBase.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
+					if (car != null)
+					{
+						FormAA form = new FormAA();
+						form.SetCar(car);
+						form.ShowDialog();
+						logger.Info($"Изъят транспорт {car} с места {maskedTextBox.Text}");
+					}
+					Draw();
 				}
-				Draw();
+				catch (BaseNotFoundException ex)
+				{
+					MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
 			}
 		}
 
 		private void listBoxBase_SelectedIndexChanged(object sendet, EventArgs e)
 		{
+			logger.Info($"Перешли на парковку {listBoxBase.SelectedItem.ToString()}");
 			Draw();
 		}
 
@@ -107,13 +125,25 @@ namespace WindowsFormsAntiAir
 		{
 			if(car != null && listBoxBase.SelectedIndex > -1)
 			{
-				if(baseCollection[listBoxBase.SelectedItem.ToString()] + car > -1)
+				try
 				{
-					Draw();
+					if (baseCollection[listBoxBase.SelectedItem.ToString()] + car > -1)
+					{
+						Draw();
+						logger.Info($"Добавлен транспорт {car}");
+					}
+					else
+					{
+						MessageBox.Show("Транспорт не удалось поставить");
+					}
 				}
-				else
+				catch(BaseOverflowException ex)
 				{
-					MessageBox.Show("Транспорт не удалось поставить");
+					MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+				catch(Exception ex)
+				{
+					MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 		}
@@ -122,13 +152,15 @@ namespace WindowsFormsAntiAir
 		{
 			if(saveFileDialog.ShowDialog() == DialogResult.OK)
 			{
-				if (baseCollection.SaveData(saveFileDialog.FileName))
+				try
 				{
-					MessageBox.Show("Сохранение проло успешно", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					baseCollection.SaveData(saveFileDialog.FileName);
+					MessageBox.Show("Сохранение прошло успешно", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					logger.Info("Сохранено в файл " + saveFileDialog.FileName);
 				}
-				else
+				catch(Exception ex)
 				{
-					MessageBox.Show("Не сохранилось", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 		}
@@ -137,15 +169,21 @@ namespace WindowsFormsAntiAir
 		{
 			if(openFileDialog.ShowDialog() == DialogResult.OK)
 			{
-				if (baseCollection.LoadData(openFileDialog.FileName))
+				try
 				{
-					MessageBox.Show("Загрузилось", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					baseCollection.LoadData(openFileDialog.FileName);
+					MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					logger.Info("Загружено из файла " + openFileDialog.FileName);
 					ReloadLevels();
 					Draw();
 				}
-				else
+				catch (BaseOccupiedPlaceException ex)
 				{
-					MessageBox.Show("Не загрузилось", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+				catch(Exception ex)
+				{
+					MessageBox.Show(ex.Message, "Неизвестная ошибка при загрузке", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 		}
