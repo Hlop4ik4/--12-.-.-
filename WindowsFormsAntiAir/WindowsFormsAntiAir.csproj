@@ -57,6 +57,12 @@
     <Compile Include="FormAA.Designer.cs">
       <DependentUpon>FormAA.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAAConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAAConfig.Designer.cs">
+      <DependentUpon>FormAAConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,9 @@
     <Compile Include="Vehicle.cs" />
     <EmbeddedResource Include="FormAA.resx">
       <DependentUpon>FormAA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAAConfig.resx">
+      <DependentUpon>FormAAConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormBase.resx">
       <DependentUpon>FormBase.cs</DependentUpon>

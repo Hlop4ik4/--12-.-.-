@@ -76,50 +76,6 @@ namespace WindowsFormsAntiAir
 			}
 		}
 
-		private void buttonSetArmoredCar_Click(object sender, EventArgs e)
-		{
-			if (listBoxBase.SelectedIndex > -1)
-			{
-				ColorDialog dialog = new ColorDialog();
-				if (dialog.ShowDialog() == DialogResult.OK)
-				{
-					var armoredCar = new ArmoredCar(100, 1000, dialog.Color);
-					if (baseCollection[listBoxBase.SelectedItem.ToString()] + armoredCar >= 0)
-					{
-						Draw();
-					}
-					else
-					{
-						MessageBox.Show("База переполнена");
-					}
-				}
-			}
-		}
-
-		private void buttonSetAA_Click(object sender, EventArgs e)
-		{
-			if (listBoxBase.SelectedIndex > -1)
-			{
-				ColorDialog dialog = new ColorDialog();
-				if (dialog.ShowDialog() == DialogResult.OK)
-				{
-					ColorDialog dialogDop = new ColorDialog();
-					if (dialogDop.ShowDialog() == DialogResult.OK)
-					{
-						var aa = new AntiAir(100, 1000, dialog.Color, dialogDop.Color, true, true);
-						if (baseCollection[listBoxBase.SelectedItem.ToString()] + aa >= 0)
-						{
-							Draw();
-						}
-						else
-						{
-							MessageBox.Show("Парковка переполнена");
-						}
-					}
-				}
-			}
-		}
-
 		private void buttonTake_Click(object sender, EventArgs e)
 		{
 			if(listBoxBase.SelectedIndex > -1 && maskedTextBox.Text != "")
@@ -138,6 +94,28 @@ namespace WindowsFormsAntiAir
 		private void listBoxBase_SelectedIndexChanged(object sendet, EventArgs e)
 		{
 			Draw();
+		}
+
+		private void buttonAddTransport_Click(object sender, EventArgs e)
+		{
+			var formAAConfig = new FormAAConfig();
+			formAAConfig.AddEvent(AddTransport);
+			formAAConfig.Show();
+		}
+
+		private void AddTransport(Vehicle car)
+		{
+			if(car != null && listBoxBase.SelectedIndex > -1)
+			{
+				if(baseCollection[listBoxBase.SelectedItem.ToString()] + car > -1)
+				{
+					Draw();
+				}
+				else
+				{
+					MessageBox.Show("Транспорт не удалось поставить");
+				}
+			}
 		}
 	}
 }
