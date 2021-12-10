@@ -35,13 +35,13 @@ namespace WindowsFormsAntiAir
 			}
 			else
 			{
-				return -1;
+				throw new BaseOverflowException();
 			}
 		}
 
 		public static T operator -(Base<T> p, int index)
 		{
-			if (index < p._places.Count || index >= 0)
+			if (index < p._places.Count && index >= 0)
 			{
 				T transport = p._places[index];
 				p._places.RemoveAt(index);
@@ -49,7 +49,7 @@ namespace WindowsFormsAntiAir
 			}
 			else
 			{
-				return null;
+				throw new BaseNotFoundException(index);
 			}
 		}
 
