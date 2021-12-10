@@ -99,10 +99,12 @@ namespace WindowsFormsAntiAir
 				}
 				catch (BaseNotFoundException ex)
 				{
+					logger.Warn($"Транспорт по месту {maskedTextBox.Text} не найден");
 					MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 				catch (Exception ex)
 				{
+					logger.Warn("Произошла неизвестная ошибка");
 					MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
@@ -139,10 +141,12 @@ namespace WindowsFormsAntiAir
 				}
 				catch(BaseOverflowException ex)
 				{
+					logger.Warn("Произошло переполнение базы");
 					MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 				catch(Exception ex)
 				{
+					logger.Warn("Произошла неизвестная ошибка");
 					MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
@@ -160,6 +164,7 @@ namespace WindowsFormsAntiAir
 				}
 				catch(Exception ex)
 				{
+					logger.Warn("Произошла неизвестная ошибка");
 					MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
@@ -183,6 +188,7 @@ namespace WindowsFormsAntiAir
 				}
 				catch(Exception ex)
 				{
+					logger.Warn("Произошла неизвестная ошибка");
 					MessageBox.Show(ex.Message, "Неизвестная ошибка при загрузке", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}

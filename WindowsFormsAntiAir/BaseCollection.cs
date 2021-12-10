@@ -125,7 +125,7 @@ namespace WindowsFormsAntiAir
 						var result = baseStages[key] + car;
 						if (result < 0)
 						{
-							throw new Exception("Не удалось загрузить транспорт на базу");
+							throw new FileLoadException("Не удалось загрузить транспорт на базу");
 						}
 					}
 				}
