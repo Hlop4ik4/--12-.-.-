@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Collections;
 
 namespace WindowsFormsAntiAir
 {
-	public class Base<T> where T : class, IAntiAir
+	public class Base<T> : IEnumerator<T>, IEnumerable<T>
+		where T : class, IAntiAir
 	{
 		private readonly List<T> _places;
 		private readonly int _maxCount;
@@ -15,6 +17,9 @@ namespace WindowsFormsAntiAir
 		private readonly int pictureHeight;
 		private readonly int _placeSizeWidth = 290;
 		private readonly int _placeSizeHeight = 130;
+		private int _currentIndex;
+		public T Current => _places[_currentIndex];
+		object IEnumerator.Current => _places[_currentIndex];
 
 		public Base(int picWidth, int picHeight)
 		{
@@ -24,19 +29,21 @@ namespace WindowsFormsAntiAir
 			pictureWidth = picWidth;
 			pictureHeight = picHeight;
 			_places = new List<T>();
+			_currentIndex = -1;
 		}
 
 		public static int operator +(Base<T> p, T car)
 		{
-			if(p._places.Count + 1 <= p._maxCount)
-			{
-				p._places.Add(car);
-				return p._places.IndexOf(car);
-			}
-			else
+			if (p._places.Count >= p._maxCount)
 			{
 				throw new BaseOverflowException();
 			}
+			if (p._places.Contains(car))
+			{
+				throw new BaseAlreadyHaveException();
+			}
+			p._places.Add(car);
+			return p._places.IndexOf(car);
 		}
 
 		public static T operator -(Base<T> p, int index)
@@ -95,6 +102,38 @@ namespace WindowsFormsAntiAir
 			}
 
 			return _places[index];
+		}
+
+		public void Sort() => _places.Sort((IComparer<T>)new CarComparer());
+
+		public void Dispose() { }
+
+		public bool MoveNext()
+		{
+			if(_currentIndex < _places.Count - 1)
+			{
+				_currentIndex++;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public void Reset()
+		{
+			_currentIndex = -1;
+		}
+
+		public IEnumerator<T> GetEnumerator()
+		{
+			return this;
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return this;
 		}
 	}
 }

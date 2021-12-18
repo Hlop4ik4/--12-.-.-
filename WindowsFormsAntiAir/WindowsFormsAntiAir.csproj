@@ -57,10 +57,12 @@
     <Compile Include="AntiAir.cs" />
     <Compile Include="ArmoredCar.cs" />
     <Compile Include="Base.cs" />
+    <Compile Include="BaseAlreadyHaveException.cs" />
     <Compile Include="BaseCollection.cs" />
     <Compile Include="BaseNotFoundException.cs" />
     <Compile Include="BaseOccupiedPlaceException.cs" />
     <Compile Include="BaseOverflowException.cs" />
+    <Compile Include="CarComparer.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="FormAA.cs">
       <SubType>Form</SubType>

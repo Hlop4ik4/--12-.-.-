@@ -193,5 +193,15 @@ namespace WindowsFormsAntiAir
 				}
 			}
 		}
+
+		private void buttonSort_Click(object sender, EventArgs e)
+		{
+			if(listBoxBase.SelectedIndex > -1)
+			{
+				baseCollection[listBoxBase.SelectedItem.ToString()].Sort();
+				Draw();
+				logger.Info("Сортировка уровней");
+			}
+		}
 	}
 }

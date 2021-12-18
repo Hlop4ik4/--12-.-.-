@@ -66,21 +66,17 @@ namespace WindowsFormsAntiAir
 				foreach (var level in baseStages)
 				{
 					sw.Write($"Base{separator}{level.Key}{Environment.NewLine}");
-					IAntiAir car = null;
-					for(int i = 0; (car = level.Value.GetNext(i)) != null; i++)
+					foreach (IAntiAir car in level.Value)
 					{
-						if(car != null)
+						if (car.GetType().Name == "ArmoredCar")
 						{
-							if(car.GetType().Name == "ArmoredCar")
-							{
-								sw.Write($"ArmoredCar{separator}");
-							}
-							if(car.GetType().Name == "AntiAir")
-							{
-								sw.Write($"AntiAir{separator}");
-							}
-							sw.Write(car + Environment.NewLine);
+							sw.Write($"ArmoredCar{separator}");
 						}
+						if (car.GetType().Name == "AntiAir")
+						{
+							sw.Write($"AntiAir{separator}");
+						}
+						sw.Write(car + Environment.NewLine);
 					}
 				}
 			}

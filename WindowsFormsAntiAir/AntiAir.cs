@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsAntiAir
 {
-	public class AntiAir : ArmoredCar
+	public class AntiAir : ArmoredCar, IEquatable<AntiAir>
 	{
 		public Color DopColor { private set; get; }
 		public bool StarEmblem { private set; get; }
@@ -70,6 +70,59 @@ namespace WindowsFormsAntiAir
 		public override string ToString()
 		{
 			return $"{base.ToString()}{separator}{DopColor.Name}{separator}{StarEmblem}{separator}{Gun}";
+		}
+
+		public bool Equals(AntiAir other)
+		{
+			if(other == null)
+			{
+				return false;
+			}
+			if(GetType().Name != other.GetType().Name)
+			{
+				return false;
+			}
+			if(MaxSpeed != other.MaxSpeed)
+			{
+				return false;
+			}
+			if(Weight != other.Weight)
+			{
+				return false;
+			}
+			if(MainColor != other.MainColor)
+			{
+				return false;
+			}
+			if(DopColor != other.DopColor)
+			{
+				return false;
+			}
+			if(StarEmblem != other.StarEmblem)
+			{
+				return false;
+			}
+			if(Gun != other.Gun)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		public override bool Equals(object obj)
+		{
+			if(obj == null)
+			{
+				return false;
+			}
+			if(!(obj is AntiAir carObj))
+			{
+				return false;
+			}
+			else
+			{
+				return Equals(carObj);
+			}
 		}
 	}
 }

@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsAntiAir
 {
-	public class ArmoredCar : Vehicle
+	public class ArmoredCar : Vehicle, IEquatable<ArmoredCar>
 	{
 		protected readonly int AAWidth = 280;
 		protected readonly int AAHeight = 100;
@@ -95,6 +95,46 @@ namespace WindowsFormsAntiAir
 		public override string ToString()
 		{
 			return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+		}
+
+		public bool Equals(ArmoredCar other)
+		{
+			if(other == null){
+				return false;
+			}
+			if(GetType().Name != other.GetType().Name)
+			{
+				return false;
+			}
+			if(MaxSpeed != other.MaxSpeed)
+			{
+				return false;
+			}
+			if(Weight != other.Weight)
+			{
+				return false;
+			}
+			if(MainColor != other.MainColor)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		public override bool Equals(object obj)
+		{
+			if(obj == null)
+			{
+				return false;
+			}
+			if(!(obj is ArmoredCar carObj))
+			{
+				return false;
+			}
+			else
+			{
+				return Equals(carObj);
+			}
 		}
 	}
 }
