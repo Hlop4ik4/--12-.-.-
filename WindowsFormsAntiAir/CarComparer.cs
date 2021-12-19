@@ -10,17 +10,17 @@ namespace WindowsFormsAntiAir
     {
         public int Compare(Vehicle x, Vehicle y)
         {
-            if(x.MaxSpeed != y.MaxSpeed)
+            if(x.GetType().Name != y.GetType().Name)
             {
-                return x.MaxSpeed.CompareTo(y.MaxSpeed);
+                return x.GetType().FullName.CompareTo(y.GetType().FullName);
             }
-            if(x.Weight != y.Weight)
+            if(x.GetType() == y.GetType() && x is ArmoredCar)
             {
-                return x.Weight.CompareTo(y.Weight);
+                return ComparerArmoredCar((ArmoredCar)x, (ArmoredCar)y);
             }
-            if(x.MainColor != y.MainColor)
+            if(x.GetType() == y.GetType() && x is AntiAir)
             {
-                x.MainColor.Name.CompareTo(y.MainColor.Name);
+                return ComparerAntiAir((AntiAir)x, (AntiAir)y);
             }
             return 0;
         }
